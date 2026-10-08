@@ -200,7 +200,7 @@ site_summary
 ```
 
 ```{r face-vs-latitude}
-ggplot() + geom_point()
+
 ```
 
 **Question 4:** Do the four traits differ between SI and SC plants in the direction predicted by the second hypothesis in the instructions? Which trait shows the largest relative difference?

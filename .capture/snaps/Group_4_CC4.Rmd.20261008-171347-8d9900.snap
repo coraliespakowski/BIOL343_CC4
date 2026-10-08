@@ -112,7 +112,7 @@ ggplot(aes(x = flower_number), data = floral_data) +
 
 **Question 2:** Of the three common population distributions (Gaussian, Poisson, binomial), which one is the best model for `face_diam_mm`, and which for `flower_number`? Explain with respect to the *type* of data as well as the shape of the histogram.
 
-**Answer:** A Gaussian distribution appears to be the best model for both `face_diam_mm` and `flower_number`. This is because ... 
+**Answer:**
 
 ## 4. Mean, standard deviation and coefficient of variation
 
@@ -189,18 +189,11 @@ SC_length_mean
 Now make a second summary with one row per site: the site's mating system, its latitude, the number of plants and the mean face diameter. Then plot mean face diameter (y) against latitude (x), one point per site, coloured by mating system, with axis labels with units, a legend title and a clean theme.
 
 ```{r site-means}
-site_summary <- floral_data %>%
-  group_by(site, self_inc, latitude_N) %>%
-  summarize(
-    plant_number = n_distinct(plant_id),
-    face_diameter_mean = mean(face_diam_mm)
-  )
 
-site_summary
 ```
 
 ```{r face-vs-latitude}
-ggplot() + geom_point()
+
 ```
 
 **Question 4:** Do the four traits differ between SI and SC plants in the direction predicted by the second hypothesis in the instructions? Which trait shows the largest relative difference?

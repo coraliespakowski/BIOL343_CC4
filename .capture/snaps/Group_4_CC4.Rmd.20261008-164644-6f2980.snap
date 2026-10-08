@@ -112,7 +112,7 @@ ggplot(aes(x = flower_number), data = floral_data) +
 
 **Question 2:** Of the three common population distributions (Gaussian, Poisson, binomial), which one is the best model for `face_diam_mm`, and which for `flower_number`? Explain with respect to the *type* of data as well as the shape of the histogram.
 
-**Answer:** A Gaussian distribution appears to be the best model for both `face_diam_mm` and `flower_number`. This is because ... 
+**Answer:**
 
 ## 4. Mean, standard deviation and coefficient of variation
 
@@ -121,10 +121,12 @@ Make two vectors, `SI` and `SC`, containing the face diameters of the SI plants 
 ```{r metrics}
 library(dplyr)
 # SI <-
-SI <- floral_data$face_diam_mm[floral_data$self_inc == "SI"]
+SI <- floral_data %>%
+    select(self_inc, face_diam_mm)%>%
+    subset(self_inc=="SI")
 
 # sample size
-length(SI)
+nrow(SI)
 # mean
 mean(SI)
 # standard deviation
@@ -133,7 +135,9 @@ sd(SI)
 sd(SI) / mean(SI)
 
 # SC <-
-SC <- floral_data$face_diam_mm[floral_data$self_inc == "SC"]
+SC <- floral_data %>%
+    select(self_inc, face_diam_mm)%>%
+    subset(self_inc=="SC")
 # sample size
 nrow(SC)
 # mean
@@ -153,54 +157,17 @@ sd(SC) / mean(SC)
 Report the sample size and the mean of each of the four traits for SI and for SC plants, using `dplyr` commands. One trait has missing values, so the code must handle `NA`.
 
 ```{r trait-means}
-# data frame for SI plants
-SI_plants <- floral_data %>%
-  filter(self_inc == "SI")
-# umbel_angle_deg mean
-SI_angle_mean <- mean(SI_plants$umbel_angle_deg, na.rm = T)
-SI_angle_mean
-# flower_number mean
-SI_flower_mean <- mean(SI_plants$flower_number, na.rm = T)
-SI_flower_mean
-# face_diam_mm mean
-SI_diam_mean <- mean(SI_plants$face_diam_mm, na.rm = T)
-SI_diam_mean
-# tube_length_mm mean
-SI_length_mean <- mean(SI_plants$tube_length_mm, na.rm = T)
-SI_length_mean
 
-# data frame for SC plants
-SC_plants <- floral_data %>%
-  filter(self_inc == "SC")
-# umbel_angle_deg mean
-SC_angle_mean <- mean(SC_plants$umbel_angle_deg, na.rm = T)
-SC_angle_mean
-# flower_number mean
-SC_flower_mean <- mean(SC_plants$flower_number, na.rm = T)
-SC_flower_mean
-# face_diam_mm mean
-SC_diam_mean <- mean(SC_plants$face_diam_mm, na.rm = T)
-SC_diam_mean
-# tube_length_mm mean
-SC_length_mean <- mean(SC_plants$tube_length_mm, na.rm = T)
-SC_length_mean
 ```
 
 Now make a second summary with one row per site: the site's mating system, its latitude, the number of plants and the mean face diameter. Then plot mean face diameter (y) against latitude (x), one point per site, coloured by mating system, with axis labels with units, a legend title and a clean theme.
 
 ```{r site-means}
-site_summary <- floral_data %>%
-  group_by(site, self_inc, latitude_N) %>%
-  summarize(
-    plant_number = n_distinct(plant_id),
-    face_diameter_mean = mean(face_diam_mm)
-  )
 
-site_summary
 ```
 
 ```{r face-vs-latitude}
-ggplot() + geom_point()
+
 ```
 
 **Question 4:** Do the four traits differ between SI and SC plants in the direction predicted by the second hypothesis in the instructions? Which trait shows the largest relative difference?

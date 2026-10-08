@@ -17,11 +17,10 @@ knitr::opts_chunk$set(echo = TRUE)
 # Name - Queen's Student Number
 
 # 1. Coralie Spakowski - 20471806
-# 2. Kaylee Ellwood - 20391007
-# 3. Ella Sha - 20457793
-# 4. Darcy Talbot - 20464912
+# 2. Kaylee Ellwood -
+# 3. Ella Sha -
+# 4. Darcy Talbot -
 # 5. Apolline Bonneville -
-# 6. Iryna Ozimek - 20508451
 
 ```
 
@@ -74,7 +73,7 @@ summary(floral_data)
 
 **Question 1:** In statistical terms, what is the **statistical population** in this study, and what is the **sample**? Give one reason the sample might not be a random, unbiased sample of that population.
 
-**Answer:** The statistical population is the Abronia umbellata (Nyctaginaceae) plant population across the geographic range of the Pacific coast. The sample includes the 966 plants sampled from 12 sites from just north of Los Angeles California to the species northern range limit in souther Oregon. However, plants were only sampled from 12 sites, the sample may not be a random unbiased sample of the statistical population especially when considering how or why these sites might have been chosen by the researcher.
+**Answer:** The statistical population is the Abronia umbellata (Nyctaginaceae) plant population across the geographic range of the Pacific coast. The sample includes the plants sampled from 12 sites from just north of Los Angeles California to the species northern range limit in souther Oregon. However, because of **XXXX**, the sample may not be a random unbiased sample of the statistical population.
 
 # Part 2 — Distributions
 
@@ -82,66 +81,29 @@ summary(floral_data)
 
 Plot the distributions of `face_diam_mm`, with facets so that SI and SC plants are in separate panels. Choose an appropriate `binwidth` that shows the shape of the data distribution, add axis labels with units and a title, and use a 'clean' theme suitable for publication. Then do the same for `flower_number`, with `binwidth = 1`. If R prints a message about `bins = 30`, you have not set the binwidth; the chunk option `message=FALSE` (already set on these chunks) hides messages like that in the knitted file.
 
-```{r face-histogram, fig.cap="", message=FALSE}
-
-library(ggplot2)
-
-ggplot(aes(x = face_diam_mm), data = floral_data) +
-  geom_histogram(binwidth = 0.7) +
-  facet_wrap(. ~ self_inc) +
-  xlab("Flower diameter, mm") +
-  ylab("Number of plants") +
-  labs(
-    title = "Flower diameter frequency per population self-compatibility type"
-  ) +
-  theme_classic()
+```{r face-histogram, message=FALSE}
+Plot2 <- ggplot(aes(x=Silene), data=MyData) + geom_histogram(binwidth = 2)
+Plot2 + facet_grid(Self~.)
 ```
 
-```{r flower-histogram, fig.cap="", message=FALSE}
+```{r flower-histogram, message=FALSE}
 
-ggplot(aes(x = flower_number), data = floral_data) +
-  geom_histogram(binwidth = 1) +
-  facet_wrap(. ~ self_inc) +
-  xlab("Flower number") +
-  ylab("Number of plants") +
-  labs(
-    title = "Flower number frequency per population self-compatibility type"
-  ) +
-  theme_classic()
 ```
 
 **Question 2:** Of the three common population distributions (Gaussian, Poisson, binomial), which one is the best model for `face_diam_mm`, and which for `flower_number`? Explain with respect to the *type* of data as well as the shape of the histogram.
 
-**Answer:** A Gaussian distribution appears to be the best model for both `face_diam_mm` and `flower_number`. This is because ... 
+**Answer:**
 
 ## 4. Mean, standard deviation and coefficient of variation
 
 Make two vectors, `SI` and `SC`, containing the face diameters of the SI plants and of the SC plants. For **each** vector, calculate the sample size, the mean, the standard deviation, and the coefficient of variation. 
 
 ```{r metrics}
-library(dplyr)
-# SI <-
-SI <- floral_data$face_diam_mm[floral_data$self_inc == "SI"]
 
-# sample size
-length(SI)
-# mean
-mean(SI)
-# standard deviation
-sd(SI)
-# coefficient of variation
-sd(SI) / mean(SI)
+# SI <-
 
 # SC <-
-SC <- floral_data$face_diam_mm[floral_data$self_inc == "SC"]
-# sample size
-nrow(SC)
-# mean
-mean(SC)
-# standard deviation
-sd(SC)
-# coefficient of variation
-sd(SC) / mean(SC)
+
 ```
 
 **Question 3:** The two standard deviations are very different, but the two coefficients of variation are almost the same. What does that tell you about how variation in flower size relates to mean flower size?
@@ -153,54 +115,17 @@ sd(SC) / mean(SC)
 Report the sample size and the mean of each of the four traits for SI and for SC plants, using `dplyr` commands. One trait has missing values, so the code must handle `NA`.
 
 ```{r trait-means}
-# data frame for SI plants
-SI_plants <- floral_data %>%
-  filter(self_inc == "SI")
-# umbel_angle_deg mean
-SI_angle_mean <- mean(SI_plants$umbel_angle_deg, na.rm = T)
-SI_angle_mean
-# flower_number mean
-SI_flower_mean <- mean(SI_plants$flower_number, na.rm = T)
-SI_flower_mean
-# face_diam_mm mean
-SI_diam_mean <- mean(SI_plants$face_diam_mm, na.rm = T)
-SI_diam_mean
-# tube_length_mm mean
-SI_length_mean <- mean(SI_plants$tube_length_mm, na.rm = T)
-SI_length_mean
 
-# data frame for SC plants
-SC_plants <- floral_data %>%
-  filter(self_inc == "SC")
-# umbel_angle_deg mean
-SC_angle_mean <- mean(SC_plants$umbel_angle_deg, na.rm = T)
-SC_angle_mean
-# flower_number mean
-SC_flower_mean <- mean(SC_plants$flower_number, na.rm = T)
-SC_flower_mean
-# face_diam_mm mean
-SC_diam_mean <- mean(SC_plants$face_diam_mm, na.rm = T)
-SC_diam_mean
-# tube_length_mm mean
-SC_length_mean <- mean(SC_plants$tube_length_mm, na.rm = T)
-SC_length_mean
 ```
 
 Now make a second summary with one row per site: the site's mating system, its latitude, the number of plants and the mean face diameter. Then plot mean face diameter (y) against latitude (x), one point per site, coloured by mating system, with axis labels with units, a legend title and a clean theme.
 
 ```{r site-means}
-site_summary <- floral_data %>%
-  group_by(site, self_inc, latitude_N) %>%
-  summarize(
-    plant_number = n_distinct(plant_id),
-    face_diameter_mean = mean(face_diam_mm)
-  )
 
-site_summary
 ```
 
 ```{r face-vs-latitude}
-ggplot() + geom_point()
+
 ```
 
 **Question 4:** Do the four traits differ between SI and SC plants in the direction predicted by the second hypothesis in the instructions? Which trait shows the largest relative difference?

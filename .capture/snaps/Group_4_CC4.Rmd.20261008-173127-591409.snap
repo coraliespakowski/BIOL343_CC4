@@ -190,17 +190,14 @@ Now make a second summary with one row per site: the site's mating system, its l
 
 ```{r site-means}
 site_summary <- floral_data %>%
-  group_by(site, self_inc, latitude_N) %>%
-  summarize(
-    plant_number = n_distinct(plant_id),
-    face_diameter_mean = mean(face_diam_mm)
-  )
+  group_by(site) %>%
+  summarize(self_inc, latitude_N, n(), face_diameter_mean = mean(face_diam_mm))
 
 site_summary
 ```
 
 ```{r face-vs-latitude}
-ggplot() + geom_point()
+
 ```
 
 **Question 4:** Do the four traits differ between SI and SC plants in the direction predicted by the second hypothesis in the instructions? Which trait shows the largest relative difference?

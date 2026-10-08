@@ -47,9 +47,7 @@ Import the observations and save it as an object called `floral_data`.
 ```{r import-data}
 
 # floral_data <-
-floral_data <- read.csv(
-  "/Users/coraliespakowski/Desktop/BIOL 343/BIOL343_CC4/Data/AbroniaFloralData.csv"
-)
+floral_data <- read.csv("")
 ```
 
 ## 2. Inspect the data
@@ -58,22 +56,11 @@ Check the object with `dim()`, `head()`, `str()` and `summary()`. Look for the u
 
 ```{r inspect-data}
 
-# dim()
-dim(floral_data)
-
-# head()
-head(floral_data)
-
-# str()
-str(floral_data)
-
-# summary()
-summary(floral_data)
 ```
 
 **Question 1:** In statistical terms, what is the **statistical population** in this study, and what is the **sample**? Give one reason the sample might not be a random, unbiased sample of that population.
 
-**Answer:** 
+**Answer:**
 
 # Part 2 — Distributions
 

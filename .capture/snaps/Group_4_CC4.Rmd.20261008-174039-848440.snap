@@ -200,20 +200,12 @@ site_summary
 ```
 
 ```{r face-vs-latitude}
-ggplot(
-  site_summary,
-  aes(x = latitude_N, y = face_diameter_mean, colour = self_inc)
-) +
-  geom_point() +
-  theme_classic() +
-  xlab("Latitude") +
-  ylab("Mean flower diameter") +
-  labs(title = "Mean flower diameter by latitude")
+ggplot(site_summary, x=latitude_N) + geom_point()
 ```
 
 **Question 4:** Do the four traits differ between SI and SC plants in the direction predicted by the second hypothesis in the instructions? Which trait shows the largest relative difference?
 
-**Answer:** 
+**Answer:**
 
 # Part 3 — From the sample to the population
 

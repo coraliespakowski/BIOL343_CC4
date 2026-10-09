@@ -29,3 +29,8 @@
 {"chunk":null,"ts":"2026-10-08T17:41:17Z","pid":46998,"engine":"r","severity":"error","render":false,"text":"## Error: \u001b[1m\u001b[22mProblem while setting up geom.\n\u001b[36mℹ\u001b[39m Error occurred in the 1st layer.\n\u001b[1mCaused by error in `compute_geom_1()`:\u001b[22m\n\u001b[1m\u001b[22m\u001b[33m!\u001b[39m `geom_point()` requires the following missing aesthetics: \u001b[32mx\u001b[39m and \u001b[32my\u001b[39m."}
 {"chunk":null,"ts":"2026-10-08T17:42:03Z","pid":46998,"engine":"r","severity":"error","render":false,"text":"## Error: could not find function \"eas\""}
 {"chunk":null,"ts":"2026-10-08T17:44:10Z","pid":46998,"engine":"r","severity":"error","render":false,"text":"## Error: target of assignment expands to non-language object"}
+{"chunk":null,"ts":"2026-10-08T19:48:49Z","pid":46998,"engine":"r","severity":"error","render":false,"text":"## Error: object 'x' not found"}
+{"chunk":null,"ts":"2026-10-08T19:48:49Z","pid":46998,"engine":"r","severity":"error","render":false,"text":"## Error: object 'SI_CI' not found"}
+{"chunk":null,"ts":"2026-10-08T19:48:49Z","pid":46998,"engine":"r","severity":"error","render":false,"text":"## Error: object 'SI_CI' not found"}
+{"chunk":null,"ts":"2026-10-08T19:53:43Z","pid":46998,"engine":"r","severity":"error","render":false,"text":"## Error: cannot take a sample larger than the population when 'replace = FALSE'"}
+{"chunk":null,"ts":"2026-10-09T17:52:58Z","pid":46998,"engine":"r","severity":"error","render":false,"text":"## Error: invalid printing digits 115"}

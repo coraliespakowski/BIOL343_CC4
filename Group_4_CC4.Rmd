@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # 2. Kaylee Ellwood - 20391007
 # 3. Ella Sha - 20457793
 # 4. Darcy Talbot - 20464912
-# 5. Apolline Bonneville -
+# 5. Apolline Bonneville - 20629019
 # 6. Iryna Ozimek - 20508451
 
 ```

@@ -130,18 +130,18 @@ mean(SI)
 # standard deviation
 sd(SI)
 # coefficient of variation
-sd(SI) / mean(SI)
+sd(SI) / mean(SI) * 100
 
 # SC <-
 SC <- floral_data$face_diam_mm[floral_data$self_inc == "SC"]
 # sample size
-nrow(SC)
+length(SC)
 # mean
 mean(SC)
 # standard deviation
 sd(SC)
 # coefficient of variation
-sd(SC) / mean(SC)
+sd(SC) / mean(SC) * 100
 ```
 
 **Question 3:** The two standard deviations are very different, but the two coefficients of variation are almost the same. What does that tell you about how variation in flower size relates to mean flower size?
@@ -156,13 +156,10 @@ Report the sample size and the mean of each of the four traits for SI and for SC
 floral_data |>
   group_by(self_inc) |>
   summarise(
-    n_angle = sum(!is.na(umbel_angle_deg)),
+    sample_size = sum(!is.na(self_inc)),
     mean_angle = mean(umbel_angle_deg, na.rm = TRUE),
-    n_flowernum = sum(!is.na(flower_number)),
     mean_flower_num = mean(flower_number, na.rm = TRUE),
-    n_diam = sum(!is.na(face_diam_mm)),
     mean_diam = mean(face_diam_mm, na.rm = TRUE),
-    n_tube = sum(!is.na(tube_length_mm)),
     mean_tube = mean(tube_length_mm, na.rm = TRUE)
   )
 ```
@@ -225,7 +222,7 @@ print(SI_upper_CI)
 SC_diam <- floral_data |>
   filter(self_inc == "SC") |>
   pull(face_diam_mm)
-SC_n <- sum(!is.na(SI_angle))
+SC_n <- sum(!is.na(SC_diam))
 SC_s <- sd(SC_diam, na.rm = TRUE)
 SC_x <- mean(SC_diam, na.rm = TRUE)
 # SC standard error, SE
@@ -308,7 +305,7 @@ Convert `SI` to z-scores and plot a histogram of them. Then convert the **mean o
 zSI <- (SI - mean(SI, na.rm = TRUE)) / sd(SI, na.rm = TRUE)
 
 ggplot() +
-  geom_histogram(aes(x = zSI), bins = 30) +
+  geom_histogram(aes(x = zSI), bins = 40) +
   labs(
     title = "Z-score distribution for face diameter in self-incompatible Abriona umbellata",
     x = "Z-score of face diameter",
@@ -343,7 +340,7 @@ t
 
 **Question 8:** Every statistical test has assumptions. Name two assumptions of the *t*-test and say, in one sentence each, whether you think the *Abronia* data meet them.
 
-**Answer:** One assumption is that the variable must be continuous. The Abronia face diameter data meets this because it is a continous measure of diameter in mm. Another assumption is that observations are independent. The data should also meet this assumption, because the flowers sampled were chosen randomly.
+**Answer:** Two assumptions are that the Abronia data follows a normal distribution and that all data points are independent of one another.
 
 ## 10. Face diameter against tube length
 
